@@ -29,7 +29,9 @@
           <div class="panel-heading">
             <div class="panel-heading-text">Tiny Chats</div>
           </div>
-          <div class="panel-body custom-panel" ng-controller="chatController">Panel Content</div>
+          <div ng-controller="chatController as chat">
+            <div ng-repeat="message in chat.messages" class="panel-body custom-panel">{{ message.content }}</div>
+          </div>
         </div>
     </div>
 
