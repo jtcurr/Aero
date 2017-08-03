@@ -4,3 +4,11 @@ body {
     background-color: snow;
     color: #333;
 }
+
+.panel-heading-text {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	text-align: center;
+	font-size: 35px;
+	font-family: 'Pacifico', cursive;
+}
