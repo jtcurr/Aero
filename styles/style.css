@@ -28,6 +28,16 @@ body {
 
 .btn-primary {
 	background-color: #9dbbe8;
+	border: 1px solid #464e5b;
+}
+
+.form-control {
+	border: 1px solid #464e5b;
+}
+
+.btn-primary {
+	padding-top: 23px;
+	padding-bottom: 23px;
 }
 
 .custom-panel:hover {
