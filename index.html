@@ -14,7 +14,7 @@
             <div class="panel-heading-text">Tiny Chats</div>
             <form class="panel-input-form" ng-submit="chat.addMessage()">
               <div class="input-group">
-                <input class="form-control width100" ng-model="chat.username" placeholder="Enter username">
+                <input class="form-control width100 user-field" ng-model="chat.username" placeholder="Enter username">
                 <input class="form-control width100" ng-model="chat.message" placeholder="Enter message">
                 <div class="input-group-btn">
                   <button class="btn btn-primary" type="submit">Chat!</button>
@@ -41,4 +41,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script src="/js/app.js" type="text/javascript"></script>
 <script src="/js/controllers/chatController.js" type="text/javascript"></script>
+<script src="/js/helperFunctions.js" type="text/javascript"></script>
 </html>
