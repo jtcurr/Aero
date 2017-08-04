@@ -8,21 +8,21 @@
 </head>
 
 <body ng-app="tinyChatApp">
-    <div class="container">
+    <div class="container" ng-controller="chatController as chat">
         <div class="panel panel-primary">
           <div class="panel-heading">
             <div class="panel-heading-text">Tiny Chats</div>
-            <form class="panel-input-form">
+            <form class="panel-input-form" ng-submit="chat.addMessage()">
               <div class="input-group">
-                <input class="form-control width100" placeholder="Enter username">
-                <input class="form-control width100" placeholder="Enter message">
+                <input class="form-control width100" ng-model="chat.username" placeholder="Enter username">
+                <input class="form-control width100" ng-model="chat.message" placeholder="Enter message">
                 <div class="input-group-btn">
-                  <button class="btn btn-primary">Chat!</button>
+                  <button class="btn btn-primary" type="submit">Chat!</button>
                 </div>
               </div>
             </form>
           </div>
-          <div ng-controller="chatController as chat" class="ng-cloak">
+          <div class="ng-cloak">
             <div ng-repeat="message in chat.messages" class="panel-body custom-panel">
               <div class="message-author">
                 {{ message.author }} ({{ message.timestamp * 1000 | date:'MM-dd' }})
