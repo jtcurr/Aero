@@ -14,8 +14,26 @@ body {
 }
 
 .container {
+	margin-top: 7%;
 	margin-left: 5%;
-  margin-right: 5%;
-  width: 90%;
+	margin-right: 5%;
+	width: 90%;
 	padding: 0;
+}
+
+.panel-input-form {
+	padding-top: 3%;
+	padding-bottom: 3%;
+}
+
+.btn-primary {
+	background-color: #9dbbe8;
+}
+
+.custom-panel:hover {
+	background-color: #cde1f4;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
 }
