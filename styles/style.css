@@ -1,5 +1,4 @@
 /* Stub CSS file for your tinychat app! */
-
 body {
     background-color: snow;
     color: #333;
@@ -22,8 +21,8 @@ body {
 }
 
 .panel-input-form {
-	padding-top: 3%;
 	padding-bottom: 3%;
+	padding-top: 3%;
 }
 
 .btn-primary {
@@ -36,8 +35,8 @@ body {
 }
 
 .btn-primary {
-	padding-top: 23px;
 	padding-bottom: 23px;
+	padding-top: 23px;
 }
 
 .custom-panel:hover {
@@ -53,11 +52,11 @@ body {
 }
 
 .message-edit-button {
+	margin-top: 15px;
+	margin-right: 1%;
 	position: absolute;
 	right: 0;
 	top: 0;
-	margin-top: 15px;
-	margin-right: 1%;
 }
 
 .message-body-with-button {

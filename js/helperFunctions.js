@@ -2,4 +2,3 @@
 function blurRemover() {
 	$(".btn").blur();
 };
-

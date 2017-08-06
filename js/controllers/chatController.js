@@ -1,4 +1,4 @@
-tinyChatApp.controller('chatController', ['$http', function($http) {
+tinyChatApp.controller('chatController', ['$http', '$timeout', function($http, $timeout) {
 
 	var vm = this;
 	vm.messages = [];
@@ -15,6 +15,12 @@ tinyChatApp.controller('chatController', ['$http', function($http) {
 	vm.message = '';
 
 	vm.addMessage = function(id) {
+
+		//Won't submit empty fields
+		if (vm.username === '' || vm.message === '') {
+			return;
+		}
+		//If there is an id being passed in then it is an existing message being changed
 		if (id && id > 0) {
 			for(var i = 0; i < vm.messages.length; i++) {
 				if(vm.messages[i].id === id) {
@@ -29,20 +35,20 @@ tinyChatApp.controller('chatController', ['$http', function($http) {
 			changeId = null;
 			return;
 		}
-		//Won't submit empty fields
-		if (vm.username === '' || vm.message === '') {
+		//If there is no id then we are creating a new message
+		else {
+			vm.date = new Date();
+			//Get epoch time in second integer format
+			vm.epochSeconds = Math.round(vm.date.getTime() / 1000);
+			vm.temp = vm.messages;
+			//New message with incremented up index and timestamp
+			vm.lastId = vm.lastId + 1;
+			objectCreatorAndConcat(vm.lastId, vm.username, vm.epochSeconds, vm.message);
+			//Changes name field to disabled so you can only enter name once
+			$(".user-field").prop("disabled", true);
+			blurRemover();
 			return;
 		}
-		vm.date = new Date();
-		//Get epoch time in second integer format
-		vm.epochSeconds = Math.round(vm.date.getTime() / 1000);
-		vm.temp = vm.messages;
-		//New message with incremented up index and timestamp
-		vm.lastId = vm.lastId + 1;
-		objectCreatorAndConcat(vm.lastId, vm.username, vm.epochSeconds, vm.message);
-		//Changes name field to disabled so you can only enter name once
-		$(".user-field").prop("disabled", true);
-		blurRemover();
 	}
 
 	//Variables to ensure only one message is able to be changed at a time.
@@ -63,7 +69,7 @@ tinyChatApp.controller('chatController', ['$http', function($http) {
 			blurRemover();
 			return;
 		}
-
+		//No functionality for other buttons
 		if(changeId !== id) {
 			return;
 		}
@@ -86,5 +92,4 @@ tinyChatApp.controller('chatController', ['$http', function($http) {
 		//Return fields to empty string
 		vm.message = '';
 	}
-
 }]);
