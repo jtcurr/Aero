@@ -1,4 +1,4 @@
-tinyChatApp.controller('chatController', ['$http', '$scope', function($http, $scope) {
+tinyChatApp.controller('chatController', ['$http', function($http) {
 
 	var vm = this;
 	vm.messages = [];
@@ -32,7 +32,7 @@ tinyChatApp.controller('chatController', ['$http', '$scope', function($http, $sc
 		}
 		//Add the newest message to the beginning of the array
 		vm.messages= [vm.messageObject].concat(vm.messages);
-		//Changes name fild to disabled so you can only enter name once
+		//Changes name field to disabled so you can only enter name once
 		$(".user-field").prop('disabled', true);
 		//Return fields to empty string
 		vm.message = '';

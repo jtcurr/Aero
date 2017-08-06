@@ -31,16 +31,6 @@ body {
 	border: 1px solid #464e5b;
 }
 
-.btn-primary:focused {
-	background-color: red;
-	color: red;
-}
-
-.btn-primary:enabled {
-	background-color: #9dbbe8;
-	border: 1px solid #464e5b;
-}
-
 .form-control {
 	border: 1px solid #464e5b;
 }
@@ -52,6 +42,22 @@ body {
 
 .custom-panel:hover {
 	background-color: #cde1f4;
+}
+
+.custom-panel {
+	position: relative;
+}
+
+.message-edit-button {
+	position: absolute;
+	right: 0;
+	top: 0;
+	margin-top: 10px;
+	margin-right: 1%;
+}
+
+.message-body-with-button {
+	max-width: 60%;
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
