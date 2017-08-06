@@ -24,13 +24,22 @@
           </div>
           <div class="ng-cloak">
             <div ng-repeat="message in chat.messages" class="panel-body custom-panel">
-              <div class="message-author">
+              <div class="message-author" id="{{ message.author }}">
                 {{ message.author }} ({{ message.timestamp * 1000 | date:'MM-dd' }})
               </div>
-              <div class="message-body">
-                {{ message.content }}
+              <div ng-if="message.author === chat.username">
+                <div class="message-body message-body-with-button">
+                  {{ message.content }}
+                </div>
+                <button type="button" class="btn btn-warning message-edit-button">
+                  Edit Message
+                </button>
               </div>
-              <button type="button" class="btn btn-warning message-edit-button" style="visibility: hidden">Edit Message</button>
+              <div ng-if="message.author !== chat.username">
+                <div class="message-body">
+                  {{ message.content }}
+                </div>
+              </div>
           </div>
         </div>
     </div>
