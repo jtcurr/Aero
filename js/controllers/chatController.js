@@ -15,13 +15,22 @@ tinyChatApp.controller('chatController', ['$http', function($http) {
 	vm.message = '';
 
 	vm.addMessage = function(id) {
-		if (id) {
+		if (id && id > 0) {
 			for(var i = 0; i < vm.messages.length; i++) {
 				if(vm.messages[i].id === id) {
-					vm.messages[i].content = vm.message;
+					vm.messages.splice(i, 1);
 				}
 			}
-			console.log(vm.messages)
+			vm.messageObject = {
+			id: id,
+			author: vm.username,
+			timestamp: vm.epochSeconds,
+			content: vm.message + '(EDITED)'
+		}
+			vm.messages= [vm.messageObject].concat(vm.messages);
+			messageChanging = false;
+			changeId = null;
+			vm.messsage = '';
 			return;
 		}
 		//Won't submit empty fields
@@ -33,8 +42,10 @@ tinyChatApp.controller('chatController', ['$http', function($http) {
 		vm.epochSeconds = Math.round(vm.date.getTime() / 1000);
 		vm.temp = vm.messages;
 		//New message with incremented up index and timestamp
+		vm.lastId = vm.lastId + 1;
+
 		vm.messageObject = {
-			id: vm.lastId++,
+			id: vm.lastId,
 			author: vm.username,
 			timestamp: vm.epochSeconds,
 			content: vm.message
@@ -47,16 +58,36 @@ tinyChatApp.controller('chatController', ['$http', function($http) {
 		vm.message = '';
 	}
 
+	var messageChanging = false;
+	var changeId = null;
+
 	vm.messageEditor = function(id, innerText) {
+console.log(messageChanging)
+console.log(changeId)
+		if(!messageChanging) {
+			$('.message-body[id^='+id+']').remove();
+			$('input[id^='+id+']').css('display', 'inline');
+			$('input[id^='+id+']').attr('placeholder', innerText);
+			$('button[id^='+id+']').removeClass('btn-warning');
+			$('button[id^='+id+']').addClass('btn-success');
+			$('button[id^='+id+']').html('Change!');
+			changeId = id;
+			messageChanging = true;
+			return;
+		}
 
-		$('.message-body[id^='+id+']').remove();
-		$('input[id^='+id+']').css('display', 'inline');
-		$('input[id^='+id+']').attr('placeholder', innerText);
-		$('button[id^='+id+']').removeClass('btn-warning');
-		$('button[id^='+id+']').addClass('btn-success');
-		$('button[id^='+id+']').html('Change!');
-		$('button[id^='+id+']').click(vm.addMessage(id));
+		if(changeId !== id) {
+			return;
+		}
 
+		if(changeId === id) {
+			$('button[id^='+changeId+']').click(vm.addMessage(id));
+			return;
+		}
+
+		else {
+			return;
+		}
 	}
 
 }]);
