@@ -23,15 +23,21 @@
             </form>
           </div>
           <div class="ng-cloak">
-            <div ng-repeat="message in chat.messages" class="panel-body custom-panel">
-              <div class="message-author" id="{{ message.author }}">
+            <div ng-repeat="message in chat.messages" class="panel-body custom-panel" id="{{ message.id }}">
+              <div class="message-author">
                 {{ message.author }} ({{ message.timestamp * 1000 | date:'MM-dd' }})
               </div>
               <div ng-if="message.author === chat.username">
-                <div class="message-body message-body-with-button">
+                <div class="message-body message-body-with-button" 
+                ng-model="chat.message" 
+                id="{{ message.id }}">
                   {{ message.content }}
                 </div>
-                <button type="button" class="btn btn-warning message-edit-button">
+                <input id="{{ message.id }}" ng-model="chat.message" style="display: none">
+                <button type="button"
+                class="btn btn-warning message-edit-button" 
+                id="{{ message.id }}" 
+                ng-click="chat.messageEditor(message.id, message.content)">
                   Edit Message
                 </button>
               </div>

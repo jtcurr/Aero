@@ -14,9 +14,18 @@ tinyChatApp.controller('chatController', ['$http', function($http) {
 	vm.username= '';
 	vm.message = '';
 
-	vm.addMessage = function() {
-		//Wont submit empty fields
-		if(vm.username === '' || vm.message === '') {
+	vm.addMessage = function(id) {
+		if (id) {
+			for(var i = 0; i < vm.messages.length; i++) {
+				if(vm.messages[i].id === id) {
+					vm.messages[i].content = vm.message;
+				}
+			}
+			console.log(vm.messages)
+			return;
+		}
+		//Won't submit empty fields
+		if (vm.username === '' || vm.message === '') {
 			return;
 		}
 		vm.date = new Date();
@@ -33,9 +42,21 @@ tinyChatApp.controller('chatController', ['$http', function($http) {
 		//Add the newest message to the beginning of the array
 		vm.messages= [vm.messageObject].concat(vm.messages);
 		//Changes name field to disabled so you can only enter name once
-		$(".user-field").prop('disabled', true);
+		$(".user-field").prop("disabled", true);
 		//Return fields to empty string
 		vm.message = '';
+	}
+
+	vm.messageEditor = function(id, innerText) {
+
+		$('.message-body[id^='+id+']').remove();
+		$('input[id^='+id+']').css('display', 'inline');
+		$('input[id^='+id+']').attr('placeholder', innerText);
+		$('button[id^='+id+']').removeClass('btn-warning');
+		$('button[id^='+id+']').addClass('btn-success');
+		$('button[id^='+id+']').html('Change!');
+		$('button[id^='+id+']').click(vm.addMessage(id));
+
 	}
 
 }]);
