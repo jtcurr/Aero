@@ -15,6 +15,12 @@ tinyChatApp.controller('chatController', ['$http', '$timeout', function($http, $
 	vm.message = '';
 
 	vm.addMessage = function(id) {
+		vm.date = new Date();
+		//Get epoch time in second integer format
+		vm.epochSeconds = Math.round(vm.date.getTime() / 1000);
+		vm.temp = vm.messages;
+		//New message with incremented up index and timestamp
+		vm.lastId = vm.lastId + 1;
 		//Won't submit empty fields
 		if (vm.username === '' || vm.message === '') {
 			return;
@@ -29,19 +35,12 @@ tinyChatApp.controller('chatController', ['$http', '$timeout', function($http, $
 			}
 			//Adds new value with a new date
 			objectCreatorAndConcat(id, vm.username, vm.epochSeconds, vm.message + '(EDITED)');
-
 			messageChanging = false;
 			changeId = null;
 			return;
 		}
 		//If there is no id then we are creating a new message
 		else {
-			vm.date = new Date();
-			//Get epoch time in second integer format
-			vm.epochSeconds = Math.round(vm.date.getTime() / 1000);
-			vm.temp = vm.messages;
-			//New message with incremented up index and timestamp
-			vm.lastId = vm.lastId + 1;
 			objectCreatorAndConcat(vm.lastId, vm.username, vm.epochSeconds, vm.message);
 			//Changes name field to disabled so you can only enter name once
 			$(".user-field").prop("disabled", true);
