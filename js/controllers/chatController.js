@@ -15,7 +15,6 @@ tinyChatApp.controller('chatController', ['$http', '$timeout', function($http, $
 	vm.message = '';
 
 	vm.addMessage = function(id) {
-
 		//Won't submit empty fields
 		if (vm.username === '' || vm.message === '') {
 			return;
